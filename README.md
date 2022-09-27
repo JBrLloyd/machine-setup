@@ -1,5 +1,11 @@
 # Mac Setup
 
+## VS Code
+
+```bash
+defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
+```
+
 ## Git
 
 ```bash
