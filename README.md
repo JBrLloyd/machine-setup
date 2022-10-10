@@ -14,6 +14,8 @@ git config --global diff.tool vscode
 git config --global difftool.vscode.cmd 'code --wait --diff $LOCAL $REMOTE'
 git config --global merge.tool vscode
 git config --global mergetool.vscode.cmd 'code --wait $MERGED'
+git config --global branch.autosetuprebase always 
+git config --global pull.rebase
 
 # Aliases
 git config --global help.autocorrect 20
@@ -25,6 +27,9 @@ git config --global alias.re 'rebase'
 git config --global alias.rec 'rebase --continue'
 git config --global alias.rea 'rebase --abort'
 git config --global alias.cm 'commit -m'
+git config --global alias.cp 'cherry-pick'
+git config --global alias.cpc 'cherry-pick --continue'
+git config --global alias.cpa 'cherry-pick -- abort'
 git config --global alias.co 'checkout'
 git config --global alias.cob 'checkout -b'
 git config --global alias.br 'branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate'
