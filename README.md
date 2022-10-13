@@ -32,13 +32,13 @@ git config --list --show-origin
 [help]
 	autocorrect = 20
 [alias]
-  br = branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
-  bclean !f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | xargs -r git branch -d; }; f
-  cmaa = commit -a --amend -C HEAD
+	br = branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
+	bclean !f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | xargs -r git branch -d; }; f
+	cmaa = commit -a --amend -C HEAD
 	cm = commit -m
 	co = checkout
 	cob = checkout -b
-  com = !git checkout $(git symbolic-ref refs/remotes/origin/HEAD | sed s@^refs/remotes/origin/@@) && git pull
+	com = !git checkout $(git symbolic-ref refs/remotes/origin/HEAD | sed s@^refs/remotes/origin/@@) && git pull
 	cp = cherry-pick
 	cpc = cherry-pick --continue
 	cpa = cherry-pick -- abort
@@ -49,24 +49,24 @@ git config --list --show-origin
 	last = log -1 HEAD --stat
 	ll = log --oneline
 	lg = !git log --pretty=format:\\\"%C(magenta)%h%Creset -%C(red)%d%Creset %s %C(dim green)(%cr) [%an]\\\" --abbrev-commit -30
-  mm = !git fetch $(git symbolic-ref refs/remotes/origin/HEAD | sed s@^refs/remotes/origin/@@) && git merge $(git symbolic-ref refs/remotes/origin/HEAD | sed s@^refs/remotes/origin/@@)
+	mm = !git fetch $(git symbolic-ref refs/remotes/origin/HEAD | sed s@^refs/remotes/origin/@@) && git merge $(git symbolic-ref refs/remotes/origin/HEAD | sed s@^refs/remotes/origin/@@)
 	p = push
 	pu = !git push -u origin HEAD
-  r = reset
-  r1 = reset HEAD^
-  r2 = reset HEAD^^
-  rh = reset --hard
-  rh1 = reset HEAD^ --hard
-  rh2 = reset HEAD^^ --hard
+  	r = reset
+  	r1 = reset HEAD^
+	r2 = reset HEAD^^
+	rh = reset --hard
+	rh1 = reset HEAD^ --hard
+	rh2 = reset HEAD^^ --hard
 	re = rebase
 	rec = rebase --continue
 	rea = rebase --abort
-  rv = remote -v
+	rv = remote -v
 	s = status -sb
 	se = !git rev-list --all | xargs git grep -F
 	shl = stash list
-  sha = stash apply
-  shs = stash save
+	sha = stash apply
+	shs = stash save
 	um = git fetch origin $(git symbolic-ref refs/remotes/origin/HEAD | sed s@^refs/remotes/origin/@@):$(git symbolic-ref refs/remotes/origin/HEAD | sed s@^refs/remotes/origin/@@)
 [branch]
 	autosetuprebase = always
