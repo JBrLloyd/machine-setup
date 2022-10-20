@@ -8,6 +8,10 @@ defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
 
 ## Git
 
+Git Config:
+
+- Mac/Linux: `~/.gitconfig`
+
 ```bash
 git config --global pull.rebase
 git config --list --show-origin
@@ -64,9 +68,11 @@ git config --list --show-origin
 	rv = remote -v
 	s = status -sb
 	se = !git rev-list --all | xargs git grep -F
-	shl = stash list
+	sh = stash
 	sha = stash apply
+	shl = stash list
 	shs = stash save
+	shp = stash pop
 	um = git fetch origin $(git symbolic-ref refs/remotes/origin/HEAD | sed s@^refs/remotes/origin/@@):$(git symbolic-ref refs/remotes/origin/HEAD | sed s@^refs/remotes/origin/@@)
 [branch]
 	autosetuprebase = always
