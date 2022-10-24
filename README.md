@@ -36,28 +36,34 @@ git config --list --show-origin
 [help]
 	autocorrect = 20
 [alias]
-	br = branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
-	bclean !f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | xargs -r git branch -d; }; f
+	bra = branch -avv
+	brl = branch --format='%(HEAD) %(color:green)%(refname:short)%(color:reset) - %(contents:subject) %(color:yellow)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
+	brr = branch --remote --format='%(color:red)%(refname:lstrip=3)%(color:reset) - %(contents:subject) %(color:yellow)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
+	bclean = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | xargs -r git branch -d; }; f"
 	cmaa = commit -a --amend -C HEAD
 	cm = commit -m
+	clean = fetch --all --prune
 	co = checkout
 	cob = checkout -b
 	com = !git checkout $(git symbolic-ref refs/remotes/origin/HEAD | sed s@^refs/remotes/origin/@@) && git pull
+	cop = "!f() { git checkout $1 && git pull; }; f"
 	cp = cherry-pick
 	cpc = cherry-pick --continue
 	cpa = cherry-pick -- abort
 	del = branch -d
 	d = diff
 	dv = difftool -t vscode -y
+	f = fetch
 	gl = config --global -l
 	last = log -1 HEAD --stat
-	ll = log --oneline
-	lg = !git log --pretty=format:\\\"%C(magenta)%h%Creset -%C(red)%d%Creset %s %C(dim green)(%cr) [%an]\\\" --abbrev-commit -30
-	mm = !git fetch $(git symbolic-ref refs/remotes/origin/HEAD | sed s@^refs/remotes/origin/@@) && git merge $(git symbolic-ref refs/remotes/origin/HEAD | sed s@^refs/remotes/origin/@@)
+	ll = log --oneline --graph --decorate --all
+	lgb = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset%n' --abbrev-commit --date=relative --branches
+	m = "!f() { git fetch origin $1:$1 && git merge $1; }; f"
+	mm = !git fetch origin $(git symbolic-ref refs/remotes/origin/HEAD | sed s@^refs/remotes/origin/@@):$(git symbolic-ref refs/remotes/origin/HEAD | sed s@^refs/remotes/origin/@@) && git merge $(git symbolic-ref refs/remotes/origin/HEAD | sed s@^refs/remotes/origin/@@)
 	p = push
-	pu = !git push -u origin HEAD
-  	r = reset
-  	r1 = reset HEAD^
+	pu = push -u origin HEAD
+	r = reset
+	r1 = reset HEAD^
 	r2 = reset HEAD^^
 	rh = reset --hard
 	rh1 = reset HEAD^ --hard
@@ -73,7 +79,7 @@ git config --list --show-origin
 	shl = stash list
 	shs = stash save
 	shp = stash pop
-	um = git fetch origin $(git symbolic-ref refs/remotes/origin/HEAD | sed s@^refs/remotes/origin/@@):$(git symbolic-ref refs/remotes/origin/HEAD | sed s@^refs/remotes/origin/@@)
+	um = !git fetch origin $(git symbolic-ref refs/remotes/origin/HEAD | sed s@^refs/remotes/origin/@@):$(git symbolic-ref refs/remotes/origin/HEAD | sed s@^refs/remotes/origin/@@)
 [branch]
 	autosetuprebase = always
 ```
