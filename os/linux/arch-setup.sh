@@ -44,7 +44,17 @@ systemctl enable sddm.service
 reboot
 
 # Post OS Setup
+cp /etc/X11/xinit/xinitrc ~/.xinitrc
 echo "exec startkde" >> ~/.xinitrc
+
+## Install zsh and replace bash
+sudo pacman -Sy zsh zsh-completions zoxide fzf
+zsh
+autoload -Uz zsh-newuser-install
+zsh-newuser-install -f
+# chsh -s $(which zsh)
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+# TODO: download shell settings and save
 
 ## Install git
 sudo pacman -S --needed base-devel git curl
@@ -64,6 +74,7 @@ git clone https://aur.archlinux.org/yay-git.git yay
 cd yay
 makepkg -si
 yay -Syu
+
 
 ## Install Programming Langs
 sudo pacman -Sy dotnet-sdk jdk17-openjdk maven python-pip rustup
@@ -85,12 +96,15 @@ dotnet --list-sdks
 archlinux-java status
 
 ## Install Font & Basic Apps
-yay -Sy azure-cli google-chrome visual-studio-code-bin astronvim perf
+yay -Sy azure-cli google-chrome visual-studio-code-bin perf
 sudo pacman -Sy ttf-fira-code htop grub-customizer
 
-## AstroNVim Addons
+## AstroNVim
 cargo install tree-sitter-cli
 sudo pacman -Sy ripgrep lazygit gdu bottom
+git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim
+git clone https://github.com/jbrlloyd/astronvim_config.git ~/.config/nvim/lua/user
+nvim --headless -c 'quitall'
 
 ## Minikube
 sudo pacman -Sy docker k9s kubectl helm containerd libvirt qemu-desktop dnsmasq iptables-nft minikube
