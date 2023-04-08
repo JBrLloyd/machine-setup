@@ -47,14 +47,21 @@ reboot
 cp /etc/X11/xinit/xinitrc ~/.xinitrc
 echo "exec startkde" >> ~/.xinitrc
 
+## Fonts
+sudo pacman -Sy noto-color-emoji-fontconfig ttf-fira-code
+
 ## Install zsh and replace bash
-sudo pacman -Sy zsh zsh-completions zoxide fzf
+sudo pacman -Sy starship zsh zsh-completions zoxide fzf
+yay -Sy autojump antigen
 zsh
 autoload -Uz zsh-newuser-install
 zsh-newuser-install -f
 # chsh -s $(which zsh)
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 # TODO: download shell settings and save
+zsh
+# pacman -Ql antigen
+starship preset nerd-font-symbols > ~/.config/starship.toml
 
 ## Install git
 sudo pacman -S --needed base-devel git curl
@@ -95,9 +102,9 @@ python --version
 dotnet --list-sdks
 archlinux-java status
 
-## Install Font & Basic Apps
+## Install Basic Apps
 yay -Sy azure-cli google-chrome visual-studio-code-bin perf
-sudo pacman -Sy noto-color-emoji-fontconfig ttf-fira-code htop grub-customizer
+sudo pacman -Sy htop grub-customizer
 
 ## AstroNVim
 cargo install tree-sitter-cli
