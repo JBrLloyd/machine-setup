@@ -40,15 +40,15 @@ reboot
 ## Enable Plasma
 sudo pacman -S xorg xorg-xinit xterm plasma plasma-desktop plasma-wayland-session kde-applications kdeplasma-addons sddm
 systemctl enable sddm.service
-echo "exec startkde" >> /home/jbrlloyd/.xinitrc
 
 reboot
 
 # Post OS Setup
+echo "exec startkde" >> ~/.xinitrc
 
 ## Install git
 sudo pacman -S --needed base-devel git curl
-curl -SY -o ~/.gitconfig
+curl -SL https://raw.githubusercontent.com/JBrLloyd/machine-setup/main/app_configs/git/.gitconfig -o ~/.gitconfig
 mkdir -p ~/dev/repos/temp && cd $_
 
 ## Grub2 Theme
@@ -94,8 +94,7 @@ cargo install tree-sitter-cli
 sudo pacman -Sy ripgrep lazygit gdu bottom
 
 ## Minikube
-sudo pacman -Sy docker k9s kubectl helm containerd libvirt qemu-desktop dnsmasq minikube
-## iptables-nft
+sudo pacman -Sy docker k9s kubectl helm containerd libvirt qemu-desktop dnsmasq iptables-nft minikube
 sudo systemctl enable docker.service
 sudo usermod -aG libvirt $(whoami)
 minikube config set driver kvm2
