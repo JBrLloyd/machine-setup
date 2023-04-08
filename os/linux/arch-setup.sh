@@ -50,6 +50,7 @@ echo "exec startkde" >> ~/.xinitrc
 sudo pacman -S --needed base-devel git curl
 curl -SL https://raw.githubusercontent.com/JBrLloyd/machine-setup/main/app_configs/git/.gitconfig -o ~/.gitconfig
 mkdir -p ~/dev/repos/temp && cd $_
+git config --list --show-origin
 
 ## Grub2 Theme
 cd ~/dev/repos/temp
@@ -65,14 +66,10 @@ makepkg -si
 yay -Syu
 
 ## Install Programming Langs
-yay -Sy python2 python2-pip dotnet-sdk-bin jetbrains-toolbox nvm
-curl -SL https://dot.net/v1/dotnet-install.sh -o ~/Downloads/dotnet-install.sh
-sudo chmod +x ~/Downloads/dotnet-install.sh
-./hom/Downloads/dotnet-install.sh --version
-# yay -Sy dotnet-sdk-6.0-bin dotnet-sdk-3.1-bin dotnet-sdk-5.0-bin
+sudo pacman -Sy dotnet-sdk jdk17-openjdk maven python-pip rustup
+yay -Sy python2 python2-pip dotnet-sdk-bin jetbrains-toolbox nvm dotnet-sdk-6.0-bin dotnet-sdk-5.0-bin dotnet-sdk-3.1-bin
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 dotnet tool install --global PowerShell
-sudo pacman -Sy python-pip rustup
 echo 'source /usr/share/nvm/init-nvm.sh' >> ~/.bashrc
 echo 'source /usr/share/nvm/init-nvm.sh' >> ~/.zshrc
 source ~/.bashrc
@@ -84,6 +81,8 @@ cat /root/.rustup/settings.toml
 rustc --version
 cargo --version
 python --version
+dotnet --list-sdks
+archlinux-java status
 
 ## Install Font & Basic Apps
 yay -Sy azure-cli google-chrome visual-studio-code-bin astronvim perf
@@ -95,7 +94,16 @@ sudo pacman -Sy ripgrep lazygit gdu bottom
 
 ## Minikube
 sudo pacman -Sy docker k9s kubectl helm containerd libvirt qemu-desktop dnsmasq iptables-nft minikube
-sudo systemctl enable docker.service
 sudo usermod -aG libvirt $(whoami)
+sudo systemctl enable docker.service
+sudo systemctl enable libvirtd.service \
+    && sudo systemctl start libvirtd.service
 minikube config set driver kvm2
 minikube start
+
+
+# Optional Installations
+sudo pacman -Sy \
+    discord
+yay -Sy \
+    slack-desktop
