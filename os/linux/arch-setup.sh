@@ -97,7 +97,7 @@ archlinux-java status
 
 ## Install Font & Basic Apps
 yay -Sy azure-cli google-chrome visual-studio-code-bin perf
-sudo pacman -Sy ttf-fira-code htop grub-customizer
+sudo pacman -Sy noto-color-emoji-fontconfig ttf-fira-code htop grub-customizer
 
 ## AstroNVim
 cargo install tree-sitter-cli
