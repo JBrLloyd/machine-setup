@@ -47,7 +47,8 @@ reboot
 # Post OS Setup
 
 ## Install git
-sudo pacman -S --needed base-devel git
+sudo pacman -S --needed base-devel git curl
+curl -SY -o ~/.gitconfig
 mkdir -p ~/dev/repos/temp && cd $_
 
 ## Grub2 Theme
@@ -64,14 +65,14 @@ makepkg -si
 yay -Syu
 
 ## Install Programming Langs
-yay -Sy dotnet-sdk-bin jetbrains-toolbox nvm
+yay -Sy python2 python2-pip dotnet-sdk-bin jetbrains-toolbox nvm
 curl -SL https://dot.net/v1/dotnet-install.sh -o ~/Downloads/dotnet-install.sh
 sudo chmod +x ~/Downloads/dotnet-install.sh
 ./hom/Downloads/dotnet-install.sh --version
-yay -Sy dotnet-sdk-6.0-bin dotnet-sdk-3.1-bin dotnet-sdk-5.0-bin
+# yay -Sy dotnet-sdk-6.0-bin dotnet-sdk-3.1-bin dotnet-sdk-5.0-bin
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 dotnet tool install --global PowerShell
-sudo pacman -Sy dotnet-sdk= rustup
+sudo pacman -Sy python-pip rustup
 echo 'source /usr/share/nvm/init-nvm.sh' >> ~/.bashrc
 echo 'source /usr/share/nvm/init-nvm.sh' >> ~/.zshrc
 source ~/.bashrc
@@ -85,11 +86,15 @@ cargo --version
 python --version
 
 ## Install Font & Basic Apps
-yay -Sy google-chrome visual-studio-code-bin astronvim perf
+yay -Sy azure-cli google-chrome visual-studio-code-bin astronvim perf
 sudo pacman -Sy ttf-fira-code htop grub-customizer
 
+## AstroNVim Addons
+cargo install tree-sitter-cli
+sudo pacman -Sy ripgrep lazygit gdu bottom
+
 ## Minikube
-sudo pacman -Sy docker k9s libvirt qemu-desktop dnsmasq minikube
+sudo pacman -Sy docker k9s kubectl helm containerd libvirt qemu-desktop dnsmasq minikube
 ## iptables-nft
 sudo systemctl enable docker.service
 sudo usermod -aG libvirt $(whoami)
