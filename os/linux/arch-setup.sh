@@ -114,7 +114,7 @@ git clone https://github.com/jbrlloyd/astronvim_config.git ~/.config/nvim/lua/us
 nvim --headless -c 'quitall'
 
 ## Minikube
-sudo pacman -Sy docker k9s kubectl helm containerd libvirt qemu-desktop dnsmasq iptables-nft minikube
+sudo pacman -Sy docker k9s kubectl helm containerd libvirt qemu-desktop dnsmasq iptables-nft minikube virt-manager virt-viewer
 sudo usermod -aG libvirt $(whoami)
 sudo systemctl enable docker.service
 sudo systemctl enable libvirtd.service \
