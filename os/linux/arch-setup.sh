@@ -53,38 +53,62 @@ reboot
 cp /etc/X11/xinit/xinitrc ~/.xinitrc
 echo "exec startkde" >> ~/.xinitrc
 
-
-## Fonts
-sudo pacman -Sy noto-color-emoji-fontconfig ttf-fira-code
-
-
-## Install zsh and replace bash
-sudo pacman -Sy starship zsh zsh-completions zoxide fzf
-yay -Sy autojump antigen
-# autoload -Uz zsh-newuser-install
-# zsh-newuser-install -f
-chsh -s $(which zsh)
-sh -c "$(curl -SL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-curl -SL https://raw.githubusercontent.com/JBrLloyd/machine-setup/main/app_configs/zsh/.zshrc -o ~/.zshrc
-curl -SL https://raw.githubusercontent.com/JBrLloyd/machine-setup/main/app_configs/zsh/.zshenv -o ~/.zshenv
-curl -SL https://raw.githubusercontent.com/JBrLloyd/machine-setup/main/app_configs/bash/.bashrc -o ~/.bashrc
-
-# pacman -Ql antigen
-starship preset nerd-font-symbols > ~/.config/starship.toml
-
-
 ## Install git
 sudo pacman -S --needed base-devel git curl
 curl -SL https://raw.githubusercontent.com/JBrLloyd/machine-setup/main/app_configs/git/.gitconfig -o ~/.gitconfig
 mkdir -p ~/dev/repos/temp && cd $_
 git config --list --show-origin
 
+## Bluetooth
+sudo pacman -Sy bluez bluez-utils
+modprobe btusb
+sudo systemctl enable bluetooth.service
+
+## Fonts
+cd ~/dev/repos/temp && cd $_
+sudo mkdir -p /usr/share/fonts/FiraCode
+svn checkout https://github.com/ryanoasis/nerd-fonts/trunk/patched-fonts/FiraCode
+find ~+ -type f -name "*Complete.ttf" -exec cp {} /usr/share/fonts/FiraCode \;
+sudo pacman -Sy noto-color-emoji-fontconfig # ttf-firacode-nerd ttf-nerd-fonts-symbols-2048-em
+cd ~
+
+
+## Install zsh and replace bash
+sudo pacman -Sy starship zsh zsh-completions zoxide fzf tmux
+yay -Sy autojump antigen
+# autoload -Uz zsh-newuser-install
+# zsh-newuser-install -f
+chsh -s $(which zsh)
+# pacman -Ql antigen
+sh -c "$(curl -SL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+curl -SL https://raw.githubusercontent.com/JBrLloyd/machine-setup/main/app_configs/zsh/.zshrc -o ~/.zshrc
+curl -SL https://raw.githubusercontent.com/JBrLloyd/machine-setup/main/app_configs/zsh/.zshenv -o ~/.zshenv
+curl -SL https://raw.githubusercontent.com/JBrLloyd/machine-setup/main/app_configs/bash/.bashrc -o ~/.bashrc
+curl -SL https://raw.githubusercontent.com/JBrLloyd/machine-setup/main/app_configs/starship/starship.toml -o ~/.config/starship.toml
+
+# tmux new-session -d
+# tmux split-window -h 'htop'
+# tmux split-window -v "sudo tcpdump 'dst port 443 || 80' -i enp6s0 -v -nn -X -l"
+# tmux new-window 'start'
+# tmux -2 attach-session -d
+
+## Weekly auto updates
+sudo pacman -Sy cronie
+sudo systemctl enable cronie.service
+
+## Remap keyboard IO key press events
+mkdir -p ~/dev/repos/temp && cd $_
+git clone https://github.com/rvaiya/keyd
+cd keyd
+make && sudo make install
+sudo curl -SL https://raw.githubusercontent.com/JBrLloyd/machine-setup/main/app_configs/keyd/default.conf -o /etc/keyd/default.conf
+sudo systemctl enable keyd && sudo systemctl start keyd
 
 ## Grub2 Theme
 cd ~/dev/repos/temp
 git clone https://github.com/vinceliuice/grub2-themes.git
-cd grub2-themes/
+cd grub2-themes/ && cd $_
 sudo ./install.sh -t whitesur -s 2k
 sudo update-grub
 
@@ -118,8 +142,9 @@ archlinux-java status
 
 
 ## Install Basic Apps
-yay -Sy azure-cli google-chrome visual-studio-code-bin perf
-sudo pacman -Sy htop grub-customizer
+yay -Sy perf tcpdump htop
+yay -Sy azure-cli google-chrome visual-studio-code-bin
+sudo pacman -Sy grub-customizer
 
 
 ## AstroNVim
