@@ -124,6 +124,7 @@ yay -Syu
 ## Install Programming Langs
 sudo pacman -Sy dotnet-sdk jdk17-openjdk maven python-pip rustup
 yay -Sy python2 python2-pip dotnet-sdk-bin jetbrains-toolbox nvm dotnet-sdk-6.0-bin dotnet-sdk-5.0-bin dotnet-sdk-3.1-bin
+source /usr/share/nvm/init-nvm.sh
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 dotnet tool install --global PowerShell
 echo 'source /usr/share/nvm/init-nvm.sh' >> ~/.bashrc
