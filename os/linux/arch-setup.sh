@@ -59,6 +59,14 @@ curl -SL https://raw.githubusercontent.com/JBrLloyd/machine-setup/main/app_confi
 mkdir -p ~/dev/repos/temp && cd $_
 git config --list --show-origin
 
+
+## Install Yay
+git clone https://aur.archlinux.org/yay-git.git yay
+cd yay
+makepkg -si
+yay -Syu
+
+
 ## Bluetooth
 sudo pacman -Sy bluez bluez-utils
 modprobe btusb
@@ -111,13 +119,6 @@ git clone https://github.com/vinceliuice/grub2-themes.git
 cd grub2-themes/ && cd $_
 sudo ./install.sh -t whitesur -s 2k
 sudo update-grub
-
-
-## Install Yay
-git clone https://aur.archlinux.org/yay-git.git yay
-cd yay
-makepkg -si
-yay -Syu
 
 
 
