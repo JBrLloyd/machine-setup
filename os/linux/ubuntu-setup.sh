@@ -12,6 +12,8 @@ sudo apt install \
 
 chsh -s $(which zsh)
 
+update-alternatives --install /usr/bin/python python /usr/bin/python3 1
+
 ## Rust
 curl https://sh.rustup.rs -sSf | sh
 source "$HOME/.cargo/env"
@@ -24,7 +26,7 @@ curl -sS https://starship.rs/install.sh | sh
 
 mkdir -p ~/dev/temp && cd $_
 git clone https://github.com/wting/autojump.git && cd autojump
-#./install.py
+./install.py
 
 
 mkdir ~/.config
