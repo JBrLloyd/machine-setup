@@ -73,7 +73,7 @@ modprobe btusb
 sudo systemctl enable bluetooth.service
 
 ## Fonts
-cd ~/dev/repos/temp && cd $_
+mkdir -p ~/dev/repos/temp && cd $_
 sudo mkdir -p /usr/share/fonts/FiraCode
 svn checkout https://github.com/ryanoasis/nerd-fonts/trunk/patched-fonts/FiraCode
 find ~+ -type f -name "*Complete.ttf" -exec cp {} /usr/share/fonts/FiraCode \;
