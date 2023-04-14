@@ -76,7 +76,7 @@ sudo systemctl enable bluetooth.service
 mkdir -p ~/dev/repos/temp && cd $_
 sudo mkdir -p /usr/share/fonts/FiraCode
 svn checkout https://github.com/ryanoasis/nerd-fonts/trunk/patched-fonts/FiraCode
-find ~+ -type f -name "*Complete.ttf" -exec cp {} /usr/share/fonts/FiraCode \;
+sudo find ~+ -type f -name "*Complete.ttf" -exec cp {} /usr/share/fonts/FiraCode \;
 sudo pacman -Sy noto-color-emoji-fontconfig # ttf-firacode-nerd ttf-nerd-fonts-symbols-2048-em
 cd ~
 
