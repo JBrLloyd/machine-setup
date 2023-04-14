@@ -41,6 +41,7 @@ git clone https://github.com/wting/autojump.git && cd autojump
 ./install.py
 
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+npm i -g yarn pnpm
 
 mkdir ~/.config
 curl -SL https://raw.githubusercontent.com/JBrLloyd/machine-setup/main/app_configs/zsh/.zshrc -o ~/.zshrc
