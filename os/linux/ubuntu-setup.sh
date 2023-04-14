@@ -2,7 +2,7 @@
 
 sudo add-apt-repository ppa:daniel-milde/gdu
 sudo apt update
-sudo apt install \
+sudo apt -y install \
   curl \
   git-all \
   subversion \
@@ -13,7 +13,8 @@ sudo apt install \
   build-essential \
   neovim \
   ripgrep \
-  gdu
+  gdu \
+  dotnet-sdk-6.0
 
 chsh -s $(which zsh)
 
@@ -53,3 +54,8 @@ export PATH="~/.cargo/bin:$PATH"
 cargo install bottom --locked
 cargo install tree-sitter-cli
 git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim
+git clone https://github.com/jbrlloyd/astronvim_config.git ~/.config/nvim/lua/user
+
+
+curl -L https://aka.ms/gcm/linux-install-source.sh | sh
+git-credential-manager configure
