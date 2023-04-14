@@ -149,7 +149,6 @@ $openstack\
 $azure\
 $env_var\
 $crystal\
-$nodejs\
 $cmd_duration $jobs $time\
 $os\
 $line_break\
